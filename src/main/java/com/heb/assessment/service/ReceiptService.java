@@ -7,10 +7,7 @@ import com.heb.assessment.model.coupon.Coupon;
 import com.heb.assessment.model.coupon.CouponsList;
 import com.heb.assessment.model.item.Item;
 import com.heb.assessment.model.item.ItemsList;
-import com.heb.assessment.model.receipt.FeatureFourReceipt;
-import com.heb.assessment.model.receipt.FeatureOneReceipt;
-import com.heb.assessment.model.receipt.FeatureThreeReceipt;
-import com.heb.assessment.model.receipt.FeatureTwoReceipt;
+import com.heb.assessment.model.receipt.ReceiptTotals;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -109,12 +106,15 @@ public class ReceiptService implements Constants {
      * @return
      * @throws CartException
      */
-    public FeatureOneReceipt calculateFeatureOneReceipt(ItemsList itemsList) throws CartException {
+    public ReceiptTotals calculateFeatureOneReceipt(ItemsList itemsList) throws CartException {
         if (CollectionUtils.isEmpty(itemsList.getItems())) {
             throw new CartException(EMPTY_CART_ERROR_CD, EMPTY_CART_MESSAGE);
         }
 
-        return new FeatureOneReceipt(Float.parseFloat(df.format(calculateSubtotal(itemsList.getItems()))));
+        return new ReceiptTotals(
+            itemsList.getItems(),
+            Float.parseFloat(df.format(calculateSubtotal(itemsList.getItems())))
+        );
     }
 
     /**
@@ -124,16 +124,17 @@ public class ReceiptService implements Constants {
      * @return
      * @throws CartException
      */
-    public FeatureTwoReceipt calculateFeatureTwoReceipt(ItemsList itemsList) throws CartException {
+    public ReceiptTotals calculateFeatureTwoReceipt(ItemsList itemsList) throws CartException {
         if (CollectionUtils.isEmpty(itemsList.getItems())) {
             throw new CartException(EMPTY_CART_ERROR_CD, EMPTY_CART_MESSAGE);
         }
 
-        Float subtotal = Float.parseFloat(df.format(calculateSubtotal(itemsList.getItems())));
-        Float taxTotal = Float.parseFloat(df.format(calculateTax(subtotal)));
-        Float grandTotal = Float.parseFloat(df.format(subtotal + taxTotal));
+        float subtotal = Float.parseFloat(df.format(calculateSubtotal(itemsList.getItems())));
+        float taxTotal = Float.parseFloat(df.format(calculateTax(subtotal)));
+        float grandTotal = Float.parseFloat(df.format(subtotal + taxTotal));
 
-        return new FeatureTwoReceipt(
+        return new ReceiptTotals(
+            itemsList.getItems(),
             subtotal,
             taxTotal,
             grandTotal
@@ -147,7 +148,7 @@ public class ReceiptService implements Constants {
      * @return
      * @throws CartException
      */
-    public FeatureThreeReceipt calculateFeatureThreeReceipt(ItemsList itemsList) throws CartException {
+    public ReceiptTotals calculateFeatureThreeReceipt(ItemsList itemsList) throws CartException {
         if (CollectionUtils.isEmpty(itemsList.getItems())) {
             throw new CartException(EMPTY_CART_ERROR_CD, EMPTY_CART_MESSAGE);
         }
@@ -157,7 +158,8 @@ public class ReceiptService implements Constants {
         float taxTotal = Float.parseFloat(df.format(calculateTax(taxableSubtotal)));
         float grandTotal = Float.parseFloat(df.format(subtotal + taxTotal));
 
-        return new FeatureThreeReceipt(
+        return new ReceiptTotals(
+            itemsList.getItems(),
             subtotal,
             taxableSubtotal,
             taxTotal,
@@ -177,7 +179,7 @@ public class ReceiptService implements Constants {
      * @return
      * @throws CartException
      */
-    public FeatureFourReceipt calculateFeatureFourReceipt(ItemsAndCoupons itemsAndCoupons) throws CartException {
+    public ReceiptTotals calculateFeatureFourReceipt(ItemsAndCoupons itemsAndCoupons) throws CartException {
         ItemsList itemsList = new ItemsList(itemsAndCoupons.getItems());
         CouponsList couponsList = new CouponsList(itemsAndCoupons.getCoupons());
 
@@ -202,7 +204,8 @@ public class ReceiptService implements Constants {
         float taxTotal = Float.parseFloat(df.format(calculateTax(taxableSubtotalAfterDiscounts)));
         float grandTotal = Float.parseFloat(df.format(subtotalAfterDiscounts + taxTotal));
 
-        return new FeatureFourReceipt(
+        return new ReceiptTotals(
+            discountedItemsList.getItems(),
             subtotalBeforeDiscounts,
             subtotalAfterDiscounts,
             discountTotal,
