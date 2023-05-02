@@ -1,12 +1,27 @@
 package com.heb.assessment.model.receipt;
 
-public class Receipt {
+public class FeatureFourReceipt {
     private float subtotalBeforeDiscounts;
     private float discountTotal;
     private float subtotalAfterDiscounts;
     private float taxableSubtotalAfterDiscounts;
     private float taxTotal;
     private float grandTotal;
+
+    public FeatureFourReceipt(
+        float subtotalBeforeDiscounts,
+        float discountTotal,
+        float subtotalAfterDiscounts,
+        float taxableSubtotalAfterDiscounts,
+        float taxTotal, float grandTotal
+    ) {
+        this.subtotalBeforeDiscounts = subtotalBeforeDiscounts;
+        this.discountTotal = discountTotal;
+        this.subtotalAfterDiscounts = subtotalAfterDiscounts;
+        this.taxableSubtotalAfterDiscounts = taxableSubtotalAfterDiscounts;
+        this.taxTotal = taxTotal;
+        this.grandTotal = grandTotal;
+    }
 
     public float getSubtotalBeforeDiscounts() {
         return subtotalBeforeDiscounts;
