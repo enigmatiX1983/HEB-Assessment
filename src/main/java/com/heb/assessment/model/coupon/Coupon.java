@@ -1,4 +1,4 @@
-package com.heb.assessment.model;
+package com.heb.assessment.model.coupon;
 
 public class Coupon {
     String couponName;

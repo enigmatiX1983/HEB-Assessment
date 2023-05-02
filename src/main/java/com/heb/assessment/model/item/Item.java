@@ -1,4 +1,4 @@
-package com.heb.assessment.model;
+package com.heb.assessment.model.item;
 
 public class Item {
     private String itemName;
