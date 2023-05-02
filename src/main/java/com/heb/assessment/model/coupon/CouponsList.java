@@ -5,6 +5,13 @@ import java.util.List;
 public class CouponsList {
     private List<Coupon> coupons;
 
+    public CouponsList() {
+    }
+
+    public CouponsList(List<Coupon> coupons) {
+        this.coupons = coupons;
+    }
+
     public List<Coupon> getCoupons() {
         return coupons;
     }

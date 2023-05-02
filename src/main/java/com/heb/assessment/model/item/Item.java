@@ -3,9 +3,6 @@ package com.heb.assessment.model.item;
 public class Item {
     private String itemName;
     private long sku;
-    private boolean isTaxable;
-    private boolean ownBrand;
-    private float price;
 
     public String getItemName() {
         return itemName;
@@ -23,11 +20,11 @@ public class Item {
         this.sku = sku;
     }
 
-    public boolean isTaxable() {
+    public boolean getIsTaxable() {
         return isTaxable;
     }
 
-    public void setTaxable(boolean taxable) {
+    public void setIsTaxable(boolean taxable) {
         isTaxable = taxable;
     }
 
@@ -46,4 +43,10 @@ public class Item {
     public void setPrice(float price) {
         this.price = price;
     }
+
+    private boolean isTaxable;
+    private boolean ownBrand;
+    private float price;
+
+
 }

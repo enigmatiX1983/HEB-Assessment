@@ -1,9 +1,14 @@
 package com.heb.assessment.model.receipt;
 
+import com.heb.assessment.model.item.Item;
+
+import java.util.List;
+
 public class FeatureTwoReceipt {
     private float subtotal;
     private float taxTotal;
     private float grandTotal;
+    private List<Item> itemsList;
 
     public FeatureTwoReceipt(
         float subtotal,

@@ -4,6 +4,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.heb.assessment.exception.CartException;
 import com.heb.assessment.exception.ExceptionBody.CartExceptionBody;
+import com.heb.assessment.model.complex.ItemsAndCoupons;
 import com.heb.assessment.model.coupon.CouponsList;
 import com.heb.assessment.model.item.ItemsList;
 import com.heb.assessment.service.ReceiptService;
@@ -23,6 +24,13 @@ public class ReceiptController  {
         this.receiptService = receiptService;
     }
 
+    /**
+     * <p>Feature 1, Calculate the grand total of a given shopping cart.</p>
+     *
+     * @param cartJson
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(method = RequestMethod.POST, value = "featureOne", produces = MediaType.APPLICATION_JSON)
     public ResponseEntity<?> featureOneReceipt(@RequestBody ItemsList cartJson) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(this.receiptService.calculateFeatureOneReceipt(cartJson));
@@ -39,8 +47,8 @@ public class ReceiptController  {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "featureFour", produces = MediaType.APPLICATION_JSON)
-    public ResponseEntity<?> featureFourReceipt(@RequestBody ItemsList cartJson, @RequestBody CouponsList couponsList) throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body(this.receiptService.calculateFeatureFourReceipt(cartJson, couponsList));
+    public ResponseEntity<?> featureFourReceipt(@RequestBody ItemsAndCoupons itemsAndCoupons) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(this.receiptService.calculateFeatureFourReceipt(itemsAndCoupons));
     }
 
     @ExceptionHandler(CartException.class)
