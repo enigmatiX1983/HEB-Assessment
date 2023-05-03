@@ -1,0 +1,25 @@
+{
+  "receiptItemList": [
+    {
+      "itemName": "H-E-B Two Bite Brownies",
+      "price": 3.61
+    },
+    {
+      "itemName": "Halo Top Vanilla Bean Ice Cream",
+      "price": 3.31
+    },
+    {
+      "itemName": "H-E-B Select Ingredients Creamy Creations Vanilla Bean Ice Cream",
+      "price": 9.83
+    },
+    {
+      "itemName": "Aveeno Daily Moisturizing Body Wash",
+      "price": 5.11
+    },
+    {
+      "itemName": "Tofurky",
+      "price": 8.15
+    }
+  ],
+  "grandTotal": 30.01
+}

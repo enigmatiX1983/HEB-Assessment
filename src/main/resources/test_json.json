@@ -1,0 +1,51 @@
+{
+  "items": [
+    {
+      "itemName": "H-E-B Two Bite Brownies",
+      "sku": 85294241,
+      "isTaxable": false,
+      "ownBrand": true,
+      "price": 3.61
+    },
+    {
+      "itemName": "Halo Top Vanilla Bean Ice Cream",
+      "sku": 95422042,
+      "isTaxable": false,
+      "ownBrand": false,
+      "price": 3.31
+    },
+    {
+      "itemName": "H-E-B Select Ingredients Creamy Creations Vanilla Bean Ice Cream",
+      "sku": 64267055,
+      "isTaxable": true,
+      "ownBrand": true,
+      "price": 9.83
+    },
+    {
+      "itemName": "Aveeno Daily Moisturizing Body Wash",
+      "sku": 12821859,
+      "isTaxable": true,
+      "ownBrand": false,
+      "price": 5.11
+    },
+    {
+      "itemName": "Tofurky",
+      "sku": 61411728,
+      "isTaxable": true,
+      "ownBrand": false,
+      "price": 8.15
+    }
+  ],
+  "coupons": [
+    {
+      "couponName": "Brownie Discount",
+      "appliedSku": 85294241,
+      "discountPrice": 0.79
+    },
+    {
+      "couponName": "Tofurky Discount",
+      "appliedSku": 61411728,
+      "discountPrice": 1.01
+    }
+  ]
+}

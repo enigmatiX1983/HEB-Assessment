@@ -5,6 +5,7 @@ import com.heb.assessment.model.item.CartItem;
 import com.heb.assessment.model.item.ReceiptItem;
 
 import java.util.List;
+import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReceiptTotals {
@@ -17,6 +18,9 @@ public class ReceiptTotals {
     private Float taxableSubtotalAfterDiscounts;
     private Float taxTotal;
     private Float grandTotal;
+
+    public ReceiptTotals() {
+    }
 
     //Constructor for feature 1
     public ReceiptTotals(
@@ -144,5 +148,26 @@ public class ReceiptTotals {
 
     public void setGrandTotal(Float grandTotal) {
         this.grandTotal = grandTotal;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ReceiptTotals)) return false;
+        ReceiptTotals that = (ReceiptTotals) o;
+        return Objects.equals(receiptItemList, that.receiptItemList) &&
+            Objects.equals(subtotals, that.subtotals) &&
+            Objects.equals(subtotalBeforeDiscounts, that.subtotalBeforeDiscounts) &&
+            Objects.equals(discountTotal, that.discountTotal) &&
+            Objects.equals(subtotalAfterDiscounts, that.subtotalAfterDiscounts) &&
+            Objects.equals(taxableSubtotal, that.taxableSubtotal) &&
+            Objects.equals(taxableSubtotalAfterDiscounts, that.taxableSubtotalAfterDiscounts) &&
+            Objects.equals(taxTotal, that.taxTotal) &&
+            Objects.equals(grandTotal, that.grandTotal);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(receiptItemList, subtotals, subtotalBeforeDiscounts, discountTotal, subtotalAfterDiscounts, taxableSubtotal, taxableSubtotalAfterDiscounts, taxTotal, grandTotal);
     }
 }

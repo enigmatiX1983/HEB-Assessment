@@ -16,4 +16,12 @@ public class ErrorTypeAndMessage {
     public void setErrorType(String errorType) {
         this.errorType = errorType;
     }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
 }

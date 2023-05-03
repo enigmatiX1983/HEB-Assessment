@@ -10,6 +10,9 @@ public class CartItem {
     private boolean ownBrand;
     private float price;
 
+    public CartItem() {
+    }
+
     public CartItem(
         String itemName,
         long sku, boolean isTaxable,
@@ -47,11 +50,11 @@ public class CartItem {
         isTaxable = taxable;
     }
 
-    public boolean getIsOwnBrand() {
+    public boolean getOwnBrand() {
         return ownBrand;
     }
 
-    public void setIsOwnBrand(boolean ownBrand) {
+    public void setOwnBrand(boolean ownBrand) {
         this.ownBrand = ownBrand;
     }
 

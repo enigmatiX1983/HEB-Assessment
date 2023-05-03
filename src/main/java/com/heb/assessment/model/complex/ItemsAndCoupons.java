@@ -6,20 +6,23 @@ import com.heb.assessment.model.item.CartItem;
 import java.util.List;
 
 public class ItemsAndCoupons {
-    private List<CartItem> cartItems;
+    private List<CartItem> items;
     private List<Coupon> coupons;
 
+    public ItemsAndCoupons() {
+    }
+
     public ItemsAndCoupons(List<CartItem> items, List<Coupon> coupons) {
-        this.cartItems = items;
+        this.items = items;
         this.coupons = coupons;
     }
 
-    public List<CartItem> getCartItems() {
-        return cartItems;
+    public List<CartItem> getItems() {
+        return items;
     }
 
-    public void setCartItems(List<CartItem> cartItems) {
-        this.cartItems = cartItems;
+    public void setItems(List<CartItem> items) {
+        this.items = items;
     }
 
     public List<Coupon> getCoupons() {

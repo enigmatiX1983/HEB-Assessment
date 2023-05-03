@@ -1,7 +1,10 @@
 package com.heb.assessment.model.item;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.List;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ItemsList {
     private List<CartItem> cartItems;
     private List<ReceiptItem> receiptItems;

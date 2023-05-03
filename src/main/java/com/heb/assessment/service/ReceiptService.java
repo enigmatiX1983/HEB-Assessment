@@ -5,7 +5,6 @@ import com.heb.assessment.exception.CartException;
 import com.heb.assessment.exception.ExceptionBody.ErrorTypeAndMessage;
 import com.heb.assessment.model.complex.ItemsAndCoupons;
 import com.heb.assessment.model.coupon.Coupon;
-import com.heb.assessment.model.coupon.CouponsList;
 import com.heb.assessment.model.item.CartItem;
 import com.heb.assessment.model.item.ItemsList;
 import com.heb.assessment.model.item.ReceiptItem;
@@ -20,7 +19,7 @@ import java.util.*;
 public class ReceiptService implements Constants {
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
-    private void throwEmptyCardException() throws CartException {
+    private void throwEmptyCartException() throws CartException {
         List<ErrorTypeAndMessage> errorTypeAndMessageList = new ArrayList<ErrorTypeAndMessage>();
         errorTypeAndMessageList.add(new ErrorTypeAndMessage(EMPTY_CART_ERROR_CD, EMPTY_CART_MESSAGE));
 
@@ -100,7 +99,13 @@ public class ReceiptService implements Constants {
             //Skip adding to the lists, it's already borked anyway!
             if (coupon != null) {
                 if (cartItem.getPrice() - coupon.getDiscountPrice() < 0.0F) {
-                    errorTypeAndMessageList.add(new ErrorTypeAndMessage(FINAL_PRICE_LESS_THAN_ZERO_ERROR_CD, FINAL_PRICE_LESS_THAN_ZERO_MESSAGE));
+                    errorTypeAndMessageList.add(
+                        new ErrorTypeAndMessage(
+                            FINAL_PRICE_LESS_THAN_ZERO_ERROR_CD,
+                            cartItem.getItemName() + FINAL_PRICE_LESS_THAN_ZERO_MESSAGE
+                        )
+                    );
+
                     continue;
                 }
             }
@@ -111,7 +116,7 @@ public class ReceiptService implements Constants {
                     cartItem.getItemName(),
                     cartItem.getSku(),
                     cartItem.getIsTaxable(),
-                    cartItem.getIsOwnBrand(),
+                    cartItem.getOwnBrand(),
                     (coupon != null) ? cartItem.getPrice() - coupon.getDiscountPrice() : cartItem.getPrice()
                 )
             );
@@ -152,11 +157,11 @@ public class ReceiptService implements Constants {
      * @throws CartException
      */
     public ReceiptTotals calculateFeatureOneReceipt(ItemsAndCoupons itemsAndCoupons) throws CartException {
-        if (CollectionUtils.isEmpty(itemsAndCoupons.getCartItems())) {
-            throwEmptyCardException();
+        if (CollectionUtils.isEmpty(itemsAndCoupons.getItems())) {
+            throwEmptyCartException();
         }
 
-        ItemsList itemsList = calculateDiscountTotal(null, itemsAndCoupons.getCartItems());
+        ItemsList itemsList = calculateDiscountTotal(null, itemsAndCoupons.getItems());
 
         return new ReceiptTotals(
             itemsList.getReceiptItems(),
@@ -172,15 +177,15 @@ public class ReceiptService implements Constants {
      * @throws CartException
      */
     public ReceiptTotals calculateFeatureTwoReceipt(ItemsAndCoupons itemsAndCoupons) throws CartException {
-        if (CollectionUtils.isEmpty(itemsAndCoupons.getCartItems())) {
-            throwEmptyCardException();
+        if (CollectionUtils.isEmpty(itemsAndCoupons.getItems())) {
+            throwEmptyCartException();
         }
 
-        float subtotal = Float.parseFloat(df.format(calculateSubtotal(itemsAndCoupons.getCartItems())));
+        float subtotal = Float.parseFloat(df.format(calculateSubtotal(itemsAndCoupons.getItems())));
         float taxTotal = Float.parseFloat(df.format(calculateTax(subtotal)));
         float grandTotal = Float.parseFloat(df.format(subtotal + taxTotal));
 
-        ItemsList itemsList = calculateDiscountTotal(null, itemsAndCoupons.getCartItems());
+        ItemsList itemsList = calculateDiscountTotal(null, itemsAndCoupons.getItems());
 
         return new ReceiptTotals(
             itemsList.getReceiptItems(),
@@ -198,16 +203,16 @@ public class ReceiptService implements Constants {
      * @throws CartException
      */
     public ReceiptTotals calculateFeatureThreeReceipt(ItemsAndCoupons itemsAndCoupons) throws CartException {
-        if (CollectionUtils.isEmpty(itemsAndCoupons.getCartItems())) {
-            throwEmptyCardException();
+        if (CollectionUtils.isEmpty(itemsAndCoupons.getItems())) {
+            throwEmptyCartException();
         }
 
-        float subtotal = Float.parseFloat(df.format(calculateSubtotal(itemsAndCoupons.getCartItems())));
-        float taxableSubtotal = Float.parseFloat(df.format(calculateTaxableSubtotal(itemsAndCoupons.getCartItems())));
+        float subtotal = Float.parseFloat(df.format(calculateSubtotal(itemsAndCoupons.getItems())));
+        float taxableSubtotal = Float.parseFloat(df.format(calculateTaxableSubtotal(itemsAndCoupons.getItems())));
         float taxTotal = Float.parseFloat(df.format(calculateTax(taxableSubtotal)));
         float grandTotal = Float.parseFloat(df.format(subtotal + taxTotal));
 
-        ItemsList itemsList = calculateDiscountTotal(null, itemsAndCoupons.getCartItems());
+        ItemsList itemsList = calculateDiscountTotal(null, itemsAndCoupons.getItems());
 
         return new ReceiptTotals(
             itemsList.getReceiptItems(),
@@ -231,8 +236,8 @@ public class ReceiptService implements Constants {
      * @throws CartException
      */
     public ReceiptTotals calculateFeatureFourReceipt(ItemsAndCoupons itemsAndCoupons) throws CartException {
-        if (CollectionUtils.isEmpty(itemsAndCoupons.getCartItems())) {
-            throwEmptyCardException();
+        if (CollectionUtils.isEmpty(itemsAndCoupons.getItems())) {
+            throwEmptyCartException();
         }
 
         //Create a map of SKUs for easy/fast O(1) lookup
@@ -243,9 +248,9 @@ public class ReceiptService implements Constants {
         }
 
         //Create new cart as per instructions with new discounted prices
-        ItemsList discountedItemsList = calculateDiscountTotal(couponsListMap, itemsAndCoupons.getCartItems());
+        ItemsList discountedItemsList = calculateDiscountTotal(couponsListMap, itemsAndCoupons.getItems());
 
-        float subtotalBeforeDiscounts = Float.parseFloat(df.format(calculateSubtotal(itemsAndCoupons.getCartItems())));
+        float subtotalBeforeDiscounts = Float.parseFloat(df.format(calculateSubtotal(itemsAndCoupons.getItems())));
         float subtotalAfterDiscounts = Float.parseFloat(df.format(calculateSubtotal(discountedItemsList.getCartItems())));
         float discountTotal = Float.parseFloat(df.format(subtotalBeforeDiscounts - subtotalAfterDiscounts));
         float taxableSubtotalAfterDiscounts = Float.parseFloat(df.format(calculateTaxableSubtotal(discountedItemsList.getCartItems())));
