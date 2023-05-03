@@ -1,14 +1,15 @@
 package com.heb.assessment;
 
 import com.heb.assessment.exception.CartException;
+import com.heb.assessment.exception.ExceptionBody.CartExceptionBody;
+import com.heb.assessment.exception.ExceptionBody.ErrorTypeAndMessage;
 import com.heb.assessment.model.complex.ItemsAndCoupons;
 import com.heb.assessment.model.item.ItemsList;
 import com.heb.assessment.model.receipt.ReceiptTotals;
 import com.heb.assessment.service.ReceiptService;
-import com.heb.assessment.utils.FileUtil;
 import com.heb.assessment.utils.MapperUtil;
 import org.junit.Assert;
-import org.junit.Before;
+import static org.junit.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -76,4 +78,35 @@ class AssessmentApplicationTests {
 
 		Assert.assertEquals("These should be equal: ", receiptService.calculateFeatureFourReceipt(testItemsAndCoupons), testItemsAndCouponsList);
 	}
+
+	@Test
+	void testEmptyCart() throws CartException, IOException {
+		String testJson = Files.readString(Path.of("", "src/main/resources").resolve("test_empty_cart_input.json"));
+		ItemsAndCoupons testItemsAndCoupons = MapperUtil.deserializeItemsAndCoupons(testJson);
+
+		String resultFile = Files.readString(Path.of("", "src/main/resources").resolve("test_empty_cart_response_json.json"));
+		CartException cartException = new CartException(MapperUtil.deserializeCartExceptionBody(resultFile));
+
+		CartException exception = assertThrows(
+				CartException.class,
+				() -> { receiptService.calculateFeatureFourReceipt(testItemsAndCoupons); }
+		);
+
+		Assert.assertEquals("These should be equal: ", exception, cartException);
+	}
+
+	@Test
+	void testCouponError() throws CartException, IOException {
+		String testJson = Files.readString(Path.of("", "src/main/resources").resolve("test_coupon_error_input_json.json"));
+		ItemsAndCoupons testItemsAndCoupons = MapperUtil.deserializeItemsAndCoupons(testJson);
+
+		String resultFile = Files.readString(Path.of("", "src/main/resources").resolve("test_coupon_error_response_json.json"));
+		CartException cartException = new CartException(MapperUtil.deserializeCartExceptionBody(resultFile));
+
+		CartException exception = assertThrows(
+				CartException.class,
+				() -> { receiptService.calculateFeatureFourReceipt(testItemsAndCoupons); }
+		);
+
+		Assert.assertEquals("These should be equal: ", exception, cartException);	}
 }

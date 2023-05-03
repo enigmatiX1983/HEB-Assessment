@@ -1,0 +1,8 @@
+{
+  "errorTypesAndMessagesList": [
+    {
+      "errorCd": "01",
+      "errorMessage": "Cart cannot be empty."
+    }
+  ]
+}

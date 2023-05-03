@@ -22,12 +22,12 @@
       "itemName": "Tofurky",
       "price": 8.15,
       "discount": 1.01,
-      "discountedPrice": 7.1399994
+      "discountedPrice": 7.14
     }
   ],
   "subtotalBeforeDiscounts": 30.01,
-  "discountTotal": 28.21,
-  "subtotalAfterDiscounts": 1.8,
+  "discountTotal": 1.8,
+  "subtotalAfterDiscounts": 28.21,
   "taxableSubtotalAfterDiscounts": 22.08,
   "taxTotal": 1.82,
   "grandTotal": 30.03

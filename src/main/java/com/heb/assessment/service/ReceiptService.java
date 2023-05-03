@@ -117,7 +117,9 @@ public class ReceiptService implements Constants {
                     cartItem.getSku(),
                     cartItem.getIsTaxable(),
                     cartItem.getOwnBrand(),
-                    (coupon != null) ? cartItem.getPrice() - coupon.getDiscountPrice() : cartItem.getPrice()
+                    (coupon != null) ?
+                          Float.parseFloat(df.format(cartItem.getPrice() - coupon.getDiscountPrice()))
+                        : Float.parseFloat(df.format(cartItem.getPrice()))
                 )
             );
 
@@ -128,8 +130,12 @@ public class ReceiptService implements Constants {
                 new ReceiptItem(
                     cartItem.getItemName(),
                     cartItem.getPrice(),
-                    (coupon != null) ? coupon.getDiscountPrice() : null,
-                    (coupon != null) ? cartItem.getPrice() - coupon.getDiscountPrice() : null
+                    (coupon != null) ?
+                          Float.parseFloat(df.format(coupon.getDiscountPrice()))
+                        : null,
+                    (coupon != null) ?
+                          Float.parseFloat(df.format(cartItem.getPrice() - coupon.getDiscountPrice()))
+                        : null
                 )
             );
         }
@@ -260,8 +266,8 @@ public class ReceiptService implements Constants {
         return new ReceiptTotals(
             discountedItemsList.getReceiptItems(),
             subtotalBeforeDiscounts,
-            subtotalAfterDiscounts,
             discountTotal,
+            subtotalAfterDiscounts,
             taxableSubtotalAfterDiscounts,
             taxTotal,
             grandTotal

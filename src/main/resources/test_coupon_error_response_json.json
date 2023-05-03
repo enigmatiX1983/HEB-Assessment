@@ -1,0 +1,12 @@
+{
+  "errorTypesAndMessagesList": [
+    {
+      "errorCd": "02",
+      "errorMessage": "H-E-B Two Bite Brownies has a final price of less than zero."
+    },
+    {
+      "errorCd": "02",
+      "errorMessage": "Tofurky has a final price of less than zero."
+    }
+  ]
+}
