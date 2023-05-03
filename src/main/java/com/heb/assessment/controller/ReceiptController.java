@@ -23,12 +23,6 @@ public class ReceiptController  {
         this.receiptService = receiptService;
     }
 
-    /**
-     * <p>Feature 1, Calculate the grand total of a given shopping cart.</p>
-     * @param itemsAndCoupons
-     * @return
-     * @throws Exception
-     */
     @RequestMapping(method = RequestMethod.POST, value = "featureOne", produces = MediaType.APPLICATION_JSON)
     public ResponseEntity<?> featureOneReceipt(@RequestBody ItemsAndCoupons itemsAndCoupons) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(this.receiptService.calculateFeatureOneReceipt(itemsAndCoupons));

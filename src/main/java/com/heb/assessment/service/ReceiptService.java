@@ -72,8 +72,8 @@ public class ReceiptService implements Constants {
 
     /**
      * <p>
-     *     Method that calculates the total discount, using the couponsListMap as a SKU lookup
-     *     If there are no coupons, it will return the original list, and a customer-receipt item list
+     * Method that calculates the total discount, using the couponsListMap as a SKU lookup
+     * If there are no coupons, it will return the original list, and a customer-receipt item list
      * </p>
      *
      * @param couponsListMap
@@ -204,6 +204,7 @@ public class ReceiptService implements Constants {
     /**
      * <p>Feature 3, Not all items are taxable.</p>
      * <p>If "isTaxable" is true then calculate tax for that item, if false then skip the tax calculation.</p>
+     *
      * @param itemsAndCoupons
      * @return
      * @throws CartException
