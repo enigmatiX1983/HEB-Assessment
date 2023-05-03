@@ -1,13 +1,14 @@
 package com.heb.assessment.model.receipt;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.heb.assessment.model.item.Item;
+import com.heb.assessment.model.item.CartItem;
+import com.heb.assessment.model.item.ReceiptItem;
 
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReceiptTotals {
-    private List<Item> itemsList;
+    private List<ReceiptItem> receiptItemList;
     private Float subtotals;
     private Float subtotalBeforeDiscounts;
     private Float discountTotal;
@@ -19,21 +20,21 @@ public class ReceiptTotals {
 
     //Constructor for feature 1
     public ReceiptTotals(
-            List<Item> itemsList,
+            List<ReceiptItem> itemsList,
             float grandTotal
     ) {
-        this.itemsList = itemsList;
+        this.receiptItemList = itemsList;
         this.grandTotal = grandTotal;
     }
 
     //Constructor for feature 2
     public ReceiptTotals(
-            List<Item> itemsList,
+            List<ReceiptItem> itemsList,
             float subtotals,
             float taxTotal,
             float grandTotal
     ) {
-        this.itemsList = itemsList;
+        this.receiptItemList = itemsList;
         this.subtotals = subtotals;
         this.taxTotal = taxTotal;
         this.grandTotal = grandTotal;
@@ -41,13 +42,13 @@ public class ReceiptTotals {
 
     //Constructor for feature 3
     public ReceiptTotals(
-            List<Item> itemsList,
+            List<ReceiptItem> itemsList,
             float subtotals,
             float taxableSubtotal,
             float taxTotal,
             float grandTotal
     ) {
-        this.itemsList = itemsList;
+        this.receiptItemList = itemsList;
         this.subtotals = subtotals;
         this.taxableSubtotal = taxableSubtotal;
         this.taxTotal = taxTotal;
@@ -56,7 +57,7 @@ public class ReceiptTotals {
 
     //Constructor for feature 4
     public ReceiptTotals(
-        List<Item> itemsList,
+        List<ReceiptItem> itemsList,
         float subtotalBeforeDiscounts,
         float discountTotal,
         float subtotalAfterDiscounts,
@@ -64,7 +65,7 @@ public class ReceiptTotals {
         float taxTotal,
         float grandTotal
     ) {
-        this.itemsList = itemsList;
+        this.receiptItemList = itemsList;
         this.subtotalBeforeDiscounts = subtotalBeforeDiscounts;
         this.discountTotal = discountTotal;
         this.subtotalAfterDiscounts = subtotalAfterDiscounts;
@@ -73,12 +74,12 @@ public class ReceiptTotals {
         this.grandTotal = grandTotal;
     }
 
-    public List<Item> getItemsList() {
-        return this.itemsList;
+    public List<ReceiptItem> getReceiptItemList() {
+        return this.receiptItemList;
     }
 
-    public void setItemsList(List<Item> itemsList) {
-        this.itemsList = itemsList;
+    public void setReceiptItemList(List<ReceiptItem> receiptItemList) {
+        this.receiptItemList = receiptItemList;
     }
 
     public Float getSubtotals() {

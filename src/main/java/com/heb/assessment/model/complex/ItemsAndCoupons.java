@@ -1,27 +1,25 @@
 package com.heb.assessment.model.complex;
 
 import com.heb.assessment.model.coupon.Coupon;
-import com.heb.assessment.model.coupon.CouponsList;
-import com.heb.assessment.model.item.Item;
-import com.heb.assessment.model.item.ItemsList;
+import com.heb.assessment.model.item.CartItem;
 
 import java.util.List;
 
 public class ItemsAndCoupons {
-    private List<Item> items;
+    private List<CartItem> cartItems;
     private List<Coupon> coupons;
 
-    public ItemsAndCoupons(List<Item> items, List<Coupon> coupons) {
-        this.items = items;
+    public ItemsAndCoupons(List<CartItem> items, List<Coupon> coupons) {
+        this.cartItems = items;
         this.coupons = coupons;
     }
 
-    public List<Item> getItems() {
-        return items;
+    public List<CartItem> getCartItems() {
+        return cartItems;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
     }
 
     public List<Coupon> getCoupons() {

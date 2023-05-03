@@ -5,7 +5,6 @@ import javax.ws.rs.core.MediaType;
 import com.heb.assessment.exception.CartException;
 import com.heb.assessment.exception.ExceptionBody.CartExceptionBody;
 import com.heb.assessment.model.complex.ItemsAndCoupons;
-import com.heb.assessment.model.coupon.CouponsList;
 import com.heb.assessment.model.item.ItemsList;
 import com.heb.assessment.service.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,24 +25,23 @@ public class ReceiptController  {
 
     /**
      * <p>Feature 1, Calculate the grand total of a given shopping cart.</p>
-     *
-     * @param cartJson
+     * @param itemsAndCoupons
      * @return
      * @throws Exception
      */
     @RequestMapping(method = RequestMethod.POST, value = "featureOne", produces = MediaType.APPLICATION_JSON)
-    public ResponseEntity<?> featureOneReceipt(@RequestBody ItemsList cartJson) throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body(this.receiptService.calculateFeatureOneReceipt(cartJson));
+    public ResponseEntity<?> featureOneReceipt(@RequestBody ItemsAndCoupons itemsAndCoupons) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(this.receiptService.calculateFeatureOneReceipt(itemsAndCoupons));
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "featureTwo", produces = MediaType.APPLICATION_JSON)
-    public ResponseEntity<?> featureTwoReceipt(@RequestBody ItemsList cartJson) throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body(this.receiptService.calculateFeatureTwoReceipt(cartJson));
+    public ResponseEntity<?> featureTwoReceipt(@RequestBody ItemsAndCoupons itemsAndCoupons) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(this.receiptService.calculateFeatureTwoReceipt(itemsAndCoupons));
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "featureThree", produces = MediaType.APPLICATION_JSON)
-    public ResponseEntity<?> featureThreeReceipt(@RequestBody ItemsList cartJson) throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body(this.receiptService.calculateFeatureThreeReceipt(cartJson));
+    public ResponseEntity<?> featureThreeReceipt(@RequestBody ItemsAndCoupons itemsAndCoupons) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(this.receiptService.calculateFeatureThreeReceipt(itemsAndCoupons));
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "featureFour", produces = MediaType.APPLICATION_JSON)

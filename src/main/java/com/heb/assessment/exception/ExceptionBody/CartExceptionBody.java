@@ -1,22 +1,19 @@
 package com.heb.assessment.exception.ExceptionBody;
 
+import java.util.List;
+
 public class CartExceptionBody {
-    private String errorType;
-    private String errorMessage;
+    private List<ErrorTypeAndMessage> errorTypesAndMessagesList;
 
-    public String getErrorType() {
-        return errorType;
+    public CartExceptionBody(List<ErrorTypeAndMessage> errorTypesAndMessagesList) {
+        this.errorTypesAndMessagesList = errorTypesAndMessagesList;
     }
 
-    public void setErrorType(String errorType) {
-        this.errorType = errorType;
+    public List<ErrorTypeAndMessage> getErrorTypesAndMessagesList() {
+        return errorTypesAndMessagesList;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setErrorTypesAndMessagesList(List<ErrorTypeAndMessage> errorTypesAndMessagesList) {
+        this.errorTypesAndMessagesList = errorTypesAndMessagesList;
     }
 }

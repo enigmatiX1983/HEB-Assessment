@@ -1,8 +1,27 @@
 package com.heb.assessment.model.item;
 
-public class Item {
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class CartItem {
     private String itemName;
     private long sku;
+    private boolean isTaxable;
+    private boolean ownBrand;
+    private float price;
+
+    public CartItem(
+        String itemName,
+        long sku, boolean isTaxable,
+        boolean ownBrand,
+        float price
+    ) {
+        this.itemName = itemName;
+        this.sku = sku;
+        this.isTaxable = isTaxable;
+        this.ownBrand = ownBrand;
+        this.price = price;
+    }
 
     public String getItemName() {
         return itemName;
@@ -28,11 +47,11 @@ public class Item {
         isTaxable = taxable;
     }
 
-    public boolean isOwnBrand() {
+    public boolean getIsOwnBrand() {
         return ownBrand;
     }
 
-    public void setOwnBrand(boolean ownBrand) {
+    public void setIsOwnBrand(boolean ownBrand) {
         this.ownBrand = ownBrand;
     }
 
@@ -43,10 +62,4 @@ public class Item {
     public void setPrice(float price) {
         this.price = price;
     }
-
-    private boolean isTaxable;
-    private boolean ownBrand;
-    private float price;
-
-
 }
