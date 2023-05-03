@@ -250,8 +250,10 @@ public class ReceiptService implements Constants {
         //Create a map of SKUs for easy/fast O(1) lookup
         Map<Long, Coupon> couponsListMap  = new HashMap<>();
 
-        for (Coupon coupon : itemsAndCoupons.getCoupons()) {
-            couponsListMap.put(coupon.getAppliedSku(), coupon);
+        if (!CollectionUtils.isEmpty(itemsAndCoupons.getCoupons())) {
+            for (Coupon coupon : itemsAndCoupons.getCoupons()) {
+                couponsListMap.put(coupon.getAppliedSku(), coupon);
+            }
         }
 
         //Create new cart as per instructions with new discounted prices
