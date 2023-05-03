@@ -5,11 +5,13 @@ To start this application, simply run in a terminal:
 
 <code>spring-boot:run</code>
 
-To test this application, swagger is available at:
+To test this application, Swagger is available at:
 
 http://localhost:8080/swagger-ui/#/
 
-For this exercise, you are able to give each API endpoint a combined cart-items and coupons JSON object, e.g.: 
+For this assessment, I created a single endpoint for each feature outputting what was specified in the instructions, while sharing the business logic and object models between each feature method, as specified (each built on top of the other).
+
+You are able to give each API endpoint a combined cart-items and coupons JSON object, e.g.: 
 
 ```json
 {
@@ -64,6 +66,8 @@ For this exercise, you are able to give each API endpoint a combined cart-items 
   ]
 }
 ```
+
+The coupons will basically be ignored with each API, except for the API implementing the fourth feature (the only one with discounts)--I thought it good to have a single unified representation for the customer receipt (fields not used are not added to the JSON).
 
 In an attempt to make the return value look more like a receipt the customer would receive, a set of ReceiptItems are returned (including the coupon discount information if applied), as well as the fields required in the Assessment instructions, e.g. (Feature 4 response to the above JSON):
 
