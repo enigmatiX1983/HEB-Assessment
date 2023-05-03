@@ -215,3 +215,5 @@ There are two exceptions currently in this application: For each feature's API, 
 
 ... which is an exception which will require the corrected coupon information to be re-sent through an additional API call/transaction.
 
+Each public ReceiptService method is covered by a unit test, as well as the two exceptions.
+
